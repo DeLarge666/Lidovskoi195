@@ -37,19 +37,19 @@ Mat src_gray;
 Mat _img;
 Mat canny_output;
 
-cvtColor(img, src_gray, COLOR_RGB2GRAY);
-blur(src_gray, src_gray, Size(3, 3));
-double otsu_thresh_val = threshold(src_gray,_img, 0, 255, THRESH_BINARY | THRESH_OTSU);
-double high_thresh_val = otsu_thresh_val, lower_thresh_val = otsu_thresh_val * 0.5;
+cvtColor(img, src_gray, COLOR_RGB2GRAY); // перводит изображение в черно-белое
+blur(src_gray, src_gray, Size(3, 3)); //размывает изображение
+double otsu_thresh_val = threshold(src_gray,_img, 0, 255, THRESH_BINARY | THRESH_OTSU); //определяет яркость серого изображения
+double high_thresh_val = otsu_thresh_val, lower_thresh_val = otsu_thresh_val * 0.5; //определяет максимумы и минимумы
 cout << otsu_thresh_val;
-Canny(src_gray, canny_output, lower_thresh_val, high_thresh_val, 3);
+Canny(src_gray, canny_output, lower_thresh_val, high_thresh_val, 3); // трехканальное изображение
 const char* source_grey_window = "Серое изображение";
 namedWindow(source_grey_window, WINDOW_AUTOSIZE);
 imshow(source_grey_window, canny_output);
-imwrite("canny_output.jpg", canny_output);
+imwrite("canny_output.jpg", canny_output);  //сохраняет и открывает обработанное изображение
 
 
 	
 		waitKey(0);
 		return(0);
-	
+}
